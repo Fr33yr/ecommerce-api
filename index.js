@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
     res.send("<h1>Hello World</h1>")
 })
 
-// all products
+// query all
 app.get('/api/products', (req, res) => {
     Product.find({})
         .then(products=>{
@@ -28,13 +28,22 @@ app.get('/api/products', (req, res) => {
         .catch(err=>console.log(err))
 })
 
-// one product
+// query by Id
 app.get('/api/products/:id', (req, res) => {
     const {id} = req.params
-    const product = Product.find(product => product.id === parseInt(id))
-    if(product){
-        res.json(product)
-    }else{
-        res.status(404).end()
-    }
+    Product.findById(id)
+        .then(product=>{
+            res.json(product)
+        })
+        .catch(err => console.log(err))
+})
+
+// query by name
+app.get('/api/products/', (req, res) => {
+    const {name} = req.params
+    Product.find({name: name})
+        .then(product=>{
+            res.json(product)
+        })
+        .catch(err => console.log(err))
 })
