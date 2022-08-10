@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 
 
 const notes = [
@@ -26,7 +25,6 @@ const notes = [
 const app = express()
 
 //middle wares
-app.use(cors())
 app.use(express.json())
 
 // puerto "x" elegido x heroku || puerto 3001
