@@ -1,7 +1,7 @@
 {
-  "name": "mern",
+  "name": "node-api",
   "version": "1.0.0",
-  "description": "a simple mern app",
+  "description": "a simple node-express api",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
