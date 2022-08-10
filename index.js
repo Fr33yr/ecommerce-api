@@ -29,10 +29,11 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const PORT = 3001
+// puerto "x" elegido x heroku || puerto 3001
+const port = proce.env.PORT || 3001
 
-app.listen(PORT, ()=> {
-    console.log("server up on ", PORT)
+app.listen(port, ()=> {
+    console.log("server up on ", port)
 })
 
 app.get('/', (req, res) => {
