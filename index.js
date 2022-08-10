@@ -24,18 +24,18 @@ const notes = [
 
 const app = express()
 
-//middle wares
+//middlewares
 app.use(express.json())
 
 // puerto "x" elegido x heroku || puerto 3001
-const port = proce.env.PORT || 3001
+const port = process.env.PORT || 3001
 
 app.listen(port, ()=> {
     console.log("server up on ", port)
 })
 
 app.get('/', (req, res) => {
-    res.send(`<h1>Hello World</h1>`)
+    res.send("<h1>Hello World</h1>")
 })
 
 // all notes
