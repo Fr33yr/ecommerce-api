@@ -1,28 +1,9 @@
 const express = require('express');
 
-
-const notes = [
-    {
-        "id": 1,
-        "content": "Todo number 1",
-        "date": "10/8/2022",
-        "important": true
-    },
-    {
-        "id": 2,
-        "content": "Todo number 2",
-        "date": "11/8/2022",
-        "important": true
-    },
-    {
-        "id": 3,
-        "content": "Todo number 3",
-        "date": "12/8/2022",
-        "important": true
-    }
-]
+require('./db') // mongodb connection
 
 const app = express()
+const Product = require('./models/products') // product schema
 
 //middlewares
 app.use(express.json())
@@ -38,17 +19,21 @@ app.get('/', (req, res) => {
     res.send("<h1>Hello World</h1>")
 })
 
-// all notes
-app.get('/api/notes', (req, res) => {
-    res.json(notes)
+// all products
+app.get('/api/products', (req, res) => {
+    Product.find({})
+        .then(products=>{
+            res.json(products)
+        })
+        .catch(err=>console.log(err))
 })
 
-// one note
-app.get('/api/notes/:id', (req, res) => {
+// one product
+app.get('/api/products/:id', (req, res) => {
     const {id} = req.params
-    const note = notes.find(note => note.id === parseInt(id))
-    if(note){
-        res.json(note)
+    const product = Product.find(product => product.id === parseInt(id))
+    if(product){
+        res.json(product)
     }else{
         res.status(404).end()
     }
