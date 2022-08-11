@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 
 require('./db') // mongodb connection
@@ -11,7 +12,7 @@ app.use(express.json())
 // puerto "x" elegido x heroku || puerto 3001
 const port = process.env.PORT || 3001
 
-app.listen(port, ()=> {
+app.listen(port, () => {
     console.log("server up on ", port)
 })
 
@@ -22,25 +23,27 @@ app.get('/', (req, res) => {
 // query all
 app.get('/api/products', (req, res) => {
     Product.find({})
-        .then(products=>{
-            if(!products){
-                res.status(404).send({message: "Items not found"})
-            }else{
+        .then(products => {
+            if (!products) {
+                res.status(404).send({ message: "Items not found" })
+            } else {
                 res.json(products)
+                response.status(204).end()
             }
         })
-        .catch(err=>console.log(err))
+        .catch(err => console.log(err))
 })
 
 // query by Id
 app.get('/api/products/:id', (req, res) => {
-    const {id} = req.params
+    const { id } = req.params
     Product.findById(id)
-        .then(product=>{
-            if(!product){
-                res.status(404).send({message: "Item not found"})
-            }else{
+        .then(product => {
+            if (!product) {
+                res.status(404).send({ message: "Item not found" })
+            } else {
                 res.json(product)
+                response.status(204).end()
             }
         })
         .catch(err => console.log(err))
@@ -48,13 +51,14 @@ app.get('/api/products/:id', (req, res) => {
 
 // query by name
 app.get('/api/products/', (req, res) => {
-    const {name} = req.params
-    Product.find({name: name})
-        .then(products=>{
-            if(!products){
-                res.status(404).send({message: "Items not found"})
-            }else{
+    const { name } = req.params
+    Product.find({ name: name })
+        .then(products => {
+            if (!products) {
+                res.status(404).send({ message: "Items not found" })
+            } else {
                 res.json(products)
+                response.status(204).end()
             }
         })
         .catch(err => console.log(err))
