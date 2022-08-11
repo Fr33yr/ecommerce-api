@@ -23,7 +23,11 @@ app.get('/', (req, res) => {
 app.get('/api/products', (req, res) => {
     Product.find({})
         .then(products=>{
-            res.json(products)
+            if(!products){
+                res.status(404).send({message: "Items not found"})
+            }else{
+                res.json(products)
+            }
         })
         .catch(err=>console.log(err))
 })
@@ -33,7 +37,11 @@ app.get('/api/products/:id', (req, res) => {
     const {id} = req.params
     Product.findById(id)
         .then(product=>{
-            res.json(product)
+            if(!product){
+                res.status(404).send({message: "Item not found"})
+            }else{
+                res.json(product)
+            }
         })
         .catch(err => console.log(err))
 })
@@ -42,8 +50,12 @@ app.get('/api/products/:id', (req, res) => {
 app.get('/api/products/', (req, res) => {
     const {name} = req.params
     Product.find({name: name})
-        .then(product=>{
-            res.json(product)
+        .then(products=>{
+            if(!products){
+                res.status(404).send({message: "Items not found"})
+            }else{
+                res.json(products)
+            }
         })
         .catch(err => console.log(err))
 })

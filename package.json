@@ -1,5 +1,5 @@
 {
-  "name": "node-api",
+  "name": "e-commerce-api",
   "version": "1.0.0",
   "description": "a simple node-express api",
   "main": "index.js",
