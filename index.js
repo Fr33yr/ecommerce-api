@@ -1,5 +1,6 @@
 const { response } = require('express');
 const express = require('express');
+const cors = require('cors');
 
 require('./db') // mongodb connection
 
@@ -7,6 +8,7 @@ const app = express()
 const Product = require('./models/products') // product schema
 
 //middlewares
+app.use(cors())
 app.use(express.json())
 
 // puerto "x" elegido x heroku || puerto 3001
