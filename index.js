@@ -30,7 +30,6 @@ app.get('/api/products', (req, res) => {
                 res.status(404).send({ message: "Items not found" })
             } else {
                 res.json(products)
-                response.status(204).end()
             }
         })
         .catch(err => console.log(err))
@@ -45,7 +44,6 @@ app.get('/api/products/:id', (req, res) => {
                 res.status(404).send({ message: "Item not found" })
             } else {
                 res.json(product)
-                response.status(204).end()
             }
         })
         .catch(err => console.log(err))
@@ -60,7 +58,6 @@ app.get('/api/products/', (req, res) => {
                 res.status(404).send({ message: "Items not found" })
             } else {
                 res.json(products)
-                response.status(204).end()
             }
         })
         .catch(err => console.log(err))
