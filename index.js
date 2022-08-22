@@ -52,13 +52,10 @@ app.get('/api/products/:id', (req, res) => {
 // query by name
 app.get('/api/products/:name', (req, res) => {
     const { name } = req.params
-    Product.find({ name: name })
-        .then(products => {
-            if (!products) {
-                res.status(404).send({ message: "Items not found" })
-            } else {
-                res.json(products)
-            }
-        })
-        .catch(err => console.log(err))
+    Product.find({ name: name }, function(err, products) {
+        if(err){
+            res.json(err)
+        }
+        res.json(products)
+    })
 })

@@ -8,7 +8,10 @@ const productsSchema = new Schema({
         text: String
     },
     imageUrl: String,
-    price: Number
+    pricing: {
+        price: Number,
+        offsale: Number
+    }
 })
 
 module.exports = model("Product", productsSchema)
