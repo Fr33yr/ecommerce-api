@@ -50,7 +50,7 @@ app.get('/api/products/:id', (req, res) => {
 })
 
 // query by name
-app.get('/api/products/', (req, res) => {
+app.get('/api/products/:name', (req, res) => {
     const { name } = req.params
     Product.find({ name: name })
         .then(products => {
