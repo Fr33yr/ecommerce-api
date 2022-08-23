@@ -1,7 +1,7 @@
 # ecommerce-api
 
 ## How it works 
-it requires a mongodb database url to connect.
+it requires a mongodb database url to connect.<br/>
  relevant links: https://www.mongodb.com/docs/guides/atlas/connection-string/ <br/>
 
 the endpoints in local development:
