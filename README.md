@@ -2,7 +2,7 @@
 
 ## How it works 
 it requires a mongodb database url to connect.
-relevant links
+relevant links:
 -https://www.mongodb.com/docs/guides/atlas/connection-string/
 
 the endpoints in local development:
