@@ -1,9 +1,9 @@
 # ecommerce-api
 
 ## How it works 
-it requires a mongodb database url to connect
-https://www.mongodb.com/docs/guides/atlas/connection-string/
-the endpoints in local development
+-it requires a mongodb database url to connect
+-https://www.mongodb.com/docs/guides/atlas/connection-string/
+-the endpoints in local development
  - http://localhost:8080/api/products?search="itemName"
  - http://localhost:8080/api/product/:id
  
