@@ -1,61 +1,29 @@
-const { response } = require('express');
-const express = require('express');
+const express = require("express")
+const dbConnect = require("./dbConnect")
+const productRoutes = require("./routes/products")
 const cors = require('cors');
-
-require('./db') // mongodb connection
-
 const app = express()
-const Product = require('./models/products') // product schema
+const Product = require('./models/Product')
 
-//middlewares
-app.use(cors())
+dbConnect()
+
 app.use(express.json())
+app.use(cors())
 
-// puerto "x" elegido x heroku || puerto 3001
-const port = process.env.PORT || 3001
+app.use("/api", productRoutes)
 
-app.listen(port, () => {
-    console.log("server up on ", port)
-})
-
-app.get('/', (req, res) => {
-    res.send("<h1>Hello World</h1>")
-})
-
-// query all
-app.get('/api/products', (req, res) => {
-    Product.find({})
-        .then(products => {
-            if (!products) {
-                res.status(404).send({ message: "Items not found" })
-            } else {
-                res.json(products)
-            }
-        })
-        .catch(err => console.log(err))
-})
-
-// query by Id
-app.get('/api/products/:id', (req, res) => {
-    const { id } = req.params
+app.use("/api/product/:id", (req, res) => {
+    const {id} = req.params
     Product.findById(id)
-        .then(product => {
-            if (!product) {
-                res.status(404).send({ message: "Item not found" })
-            } else {
-                res.json(product)
-            }
-        })
-        .catch(err => console.log(err))
+    .then(product => {
+        if(!product){
+            res.status(404).send({message: "Item not found"})
+        }else {
+            res.status(200).json(product)
+        }
+    })
+    .catch(err => console.log(err))
 })
 
-// query by name
-app.get('/api/products/:name', (req, res) => {
-    const { name } = req.params
-    Product.find({ name: name }, function(err, products) {
-        if(err){
-            res.json(err)
-        }
-        res.json(products)
-    })
-})
+const port = process.env.PORT || 8080
+app.listen(port, ()=> console.log(`Listening on port ${port}...`))
