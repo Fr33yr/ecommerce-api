@@ -5,7 +5,7 @@ const Product = require("../models/Product")
 router.get("/products", async (req, res) => {
     try{
         const page = parseInt(req.query.page) -1||0
-        const limit = parseInt(req.query.limit) || 10
+        const limit = parseInt(req.query.limit) || 15
         const search = req.query.search || ""
 
         const products = await Product.find({name: {$regex: search, $options: "i"}})
