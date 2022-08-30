@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-
-const MONGODB_URI = require('./db.config.js')
+require('dotenv').config()
 
 
 const dbConnect = () => {
     const connectionParams = {useNewUrlParser: true}
-    mongoose.connect(MONGODB_URI, connectionParams)
+    mongoose.connect(process.env.MONGODB_URI, connectionParams)
 
     mongoose.connection.on("connected", ()=>{
         console.log("Connected to database succesfully")
